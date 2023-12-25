@@ -1,0 +1,25 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+    <div class="card">
+        <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.name }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ object.name }}</h5>
+            <p class="card-text">{{ object.description }}</p>
+            <p class="card-text">Brand: {{ object.brand.name }}</p>
+            <p class="card-text">Quantity: {{ object.quantity }}</p>
+            <p class="card-text">Price: ${{ object.price }}</p>
+            {% if user.is_authenticated %}
+                <a href="#" class="btn btn-success">Buy Now</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <h3>Comments</h3>
+    <ul>
+        {% for comment in object.comments.all %}
+            <li>{{ comment.user.username }}: {{ comment.text }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
